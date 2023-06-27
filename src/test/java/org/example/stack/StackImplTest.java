@@ -1,13 +1,11 @@
-package org.example;
+package org.example.stack;
 
-import org.example.stack.Stack;
-import org.example.stack.StackImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class StackImplTest {
 
@@ -94,7 +92,7 @@ public class StackImplTest {
             stack.push(i);
 
         assertThat(stack.isFull(), is(true));
-        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> stack.push(11));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> stack.push(11));
 
     }
 
@@ -102,7 +100,7 @@ public class StackImplTest {
     public void popInAnEmptyStack(){
         assertThat(stack.isEmpty(), is(true));
 
-        Assertions.assertThrows(ArrayIndexOutOfBoundsException.class, () -> stack.pop());
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> stack.pop());
     }
 
 }
