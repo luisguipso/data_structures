@@ -10,6 +10,11 @@ public class QueueImpl implements Queue {
         maxNumberOfElements = 10;
         elements = new int[maxNumberOfElements];
     }
+    public QueueImpl(int maxNumberOfElements) {
+        numberOfElements = 0;
+        this.maxNumberOfElements = maxNumberOfElements;
+        elements = new int[maxNumberOfElements];
+    }
 
     @Override
     public void add(int element) {

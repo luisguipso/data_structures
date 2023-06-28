@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.queue.Queue;
+import org.example.queue.QueueImpl;
 import org.example.stack.Stack;
 import org.example.stack.StackImpl;
 
@@ -8,6 +10,17 @@ import java.util.Scanner;
 public class App {
     public static void main( String[] args ) {
         //decimalToBinaryUsingStack();
+        //addOneMilionElementsToAQueueAndDequeue();
+    }
+
+    private static void addOneMilionElementsToAQueueAndDequeue() {
+        Queue queue = new QueueImpl(1_000_000);
+        System.out.println("adding 1 Milion elements to the queue");
+        for (int i = 0; i < 1_000_000; i++)
+            queue.add(i);
+        System.out.println("Start removing the elements...");
+        while(!queue.isEmpty())
+            System.out.println(queue.remove());
         System.out.println("\nThe end of program!");
     }
 
