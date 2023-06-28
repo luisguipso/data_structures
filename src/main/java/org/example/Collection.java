@@ -1,8 +1,7 @@
-package org.example.list;
+package org.example;
 
-public interface List {
+public interface Collection {
     void add(int element);
     int remove();
     boolean isEmpty();
-    int size();
 }

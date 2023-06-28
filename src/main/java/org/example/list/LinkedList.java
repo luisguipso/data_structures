@@ -1,6 +1,6 @@
 package org.example.list;
 
-public class LinkedList implements List{
+public class LinkedList implements UnlimitedCollection {
 
     private Node first;
     private int size;

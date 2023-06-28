@@ -1,7 +1,7 @@
 package org.example;
 
-import org.example.queue.Queue;
-import org.example.queue.QueueImpl;
+import org.example.queue.LimitedCollection;
+import org.example.queue.LimitedQueue;
 import org.example.stack.Stack;
 import org.example.stack.StackImpl;
 
@@ -14,7 +14,7 @@ public class App {
     }
 
     private static void addOneMilionElementsToAQueueAndDequeue() {
-        Queue queue = new QueueImpl(1_000_000);
+        LimitedCollection queue = new LimitedQueue(1_000_000);
         System.out.println("adding 1 Milion elements to the queue");
         for (int i = 0; i < 1_000_000; i++)
             queue.add(i);

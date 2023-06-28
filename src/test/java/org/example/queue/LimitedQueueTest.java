@@ -8,39 +8,39 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-public class QueueImplTest {
+class LimitedQueueTest {
 
-    private Queue queue;
+    private LimitedCollection queue;
 
     @BeforeEach
-    public void setup(){
-        queue = new QueueImpl();
+    void setup(){
+        queue = new LimitedQueue();
     }
 
     @Test
-    public void newQueueIsEmpty(){
+    void newQueueIsEmpty(){
         assertThat(queue.isEmpty(), is(true));
     }
 
     @Test
-    public void newQueueIsNotFull(){
+    void newQueueIsNotFull(){
         assertThat(queue.isFull(), is(false));
     }
 
     @Test
-    public void afterAddAnItemQueueIsNotEmpty(){
+    void afterAddAnItemQueueIsNotEmpty(){
         queue.add(1);
         assertThat(queue.isEmpty(), is(false));
     }
 
     @Test
-    public void afterAddAnItemQueueIsNotFull(){
+    void afterAddAnItemQueueIsNotFull(){
         queue.add(1);
         assertThat(queue.isFull(), is(false));
     }
 
     @Test
-    public void afterAddAllItensQueueIsFull(){
+    void afterAddAllItensQueueIsFull(){
         for (int i : new int[]{1,2,3,4,5,6,7,8,9,10})
             queue.add(i);
 
@@ -48,7 +48,7 @@ public class QueueImplTest {
     }
 
     @Test
-    public void removeReturnsTheFirstElementAdded(){
+    void removeReturnsTheFirstElementAdded(){
         int[] ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         for (int i : ints)
             queue.add(i);
@@ -58,7 +58,7 @@ public class QueueImplTest {
     }
 
     @Test
-    public void addBeforeFilledAllElements(){
+    void addBeforeFilledAllElements(){
         int[] ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         for (int i : ints)
             queue.add(i);
@@ -67,7 +67,7 @@ public class QueueImplTest {
     }
 
     @Test
-    public void removeFromAnEmptyQueue(){
+    void removeFromAnEmptyQueue(){
         assertThat(queue.isEmpty(), is(true));
 
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> queue.remove());

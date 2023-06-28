@@ -8,7 +8,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 class LinkedListTest {
 
-    private List list;
+    private UnlimitedCollection list;
 
     @BeforeEach
     public void setup(){

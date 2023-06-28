@@ -1,16 +1,16 @@
 package org.example.queue;
 
-public class QueueImpl implements Queue {
+public class LimitedQueue implements LimitedCollection {
     private int numberOfElements;
     private final int maxNumberOfElements;
     private final int[] elements;
 
-    public QueueImpl() {
+    public LimitedQueue() {
         numberOfElements = 0;
         maxNumberOfElements = 10;
         elements = new int[maxNumberOfElements];
     }
-    public QueueImpl(int maxNumberOfElements) {
+    public LimitedQueue(int maxNumberOfElements) {
         numberOfElements = 0;
         this.maxNumberOfElements = maxNumberOfElements;
         elements = new int[maxNumberOfElements];
