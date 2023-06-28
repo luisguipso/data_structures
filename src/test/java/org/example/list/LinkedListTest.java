@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class LinkedListTest {
+class LinkedListTest {
 
     private List list;
 
@@ -16,19 +16,19 @@ public class LinkedListTest {
     }
 
     @Test
-    public void onCreatedIsEmpty(){
+    void onCreatedIsEmpty(){
         assertThat(list.isEmpty(), is(true));
     }
 
     @Test
-    public void afterAddAnElementIsNotEmpty(){
+    void afterAddAnElementIsNotEmpty(){
 
         list.add(1);
         assertThat(list.isEmpty(), is(false));
     }
 
     @Test
-    public void shouldRemoveTheFirstElement(){
+    void shouldRemoveTheFirstElement(){
         list.add(1);
         list.add(2);
         list.add(3);
@@ -39,7 +39,7 @@ public class LinkedListTest {
 
 
     @Test
-    public void shouldMatchTheSize(){
+    void shouldMatchTheSize(){
         assertThat(list.size(), is(0));
         list.add(1);
         assertThat(list.size(), is(1));
@@ -57,7 +57,7 @@ public class LinkedListTest {
 
 
     @Test
-    public void shouldBeEmptyAfterRemoveAllElements(){
+    void shouldBeEmptyAfterRemoveAllElements(){
         list.add(1);
         list.add(2);
         list.add(3);
