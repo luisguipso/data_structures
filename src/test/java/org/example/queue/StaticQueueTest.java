@@ -8,13 +8,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-class LimitedQueueTest {
+class StaticQueueTest {
 
-    private LimitedCollection queue;
+    private StaticCollection queue;
 
     @BeforeEach
     void setup(){
-        queue = new LimitedQueue();
+        queue = new StaticQueue();
     }
 
     @Test

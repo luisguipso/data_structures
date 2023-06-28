@@ -2,6 +2,6 @@ package org.example.queue;
 
 import org.example.Collection;
 
-public interface LimitedCollection extends Collection {
+public interface StaticCollection extends Collection {
     boolean isFull();
 }

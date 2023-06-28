@@ -1,6 +1,6 @@
 package org.example.list;
 
-public class LinkedList implements UnlimitedCollection {
+public class LinkedList implements DynamicCollection {
 
     private Node first;
     private int size;

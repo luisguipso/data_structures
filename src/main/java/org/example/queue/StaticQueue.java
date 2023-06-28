@@ -1,16 +1,16 @@
 package org.example.queue;
 
-public class LimitedQueue implements LimitedCollection {
+public class StaticQueue implements StaticCollection {
     private int numberOfElements;
     private final int maxNumberOfElements;
     private final int[] elements;
 
-    public LimitedQueue() {
+    public StaticQueue() {
         numberOfElements = 0;
         maxNumberOfElements = 10;
         elements = new int[maxNumberOfElements];
     }
-    public LimitedQueue(int maxNumberOfElements) {
+    public StaticQueue(int maxNumberOfElements) {
         numberOfElements = 0;
         this.maxNumberOfElements = maxNumberOfElements;
         elements = new int[maxNumberOfElements];

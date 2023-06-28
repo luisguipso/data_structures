@@ -2,6 +2,6 @@ package org.example.list;
 
 import org.example.Collection;
 
-public interface UnlimitedCollection extends Collection {
+public interface DynamicCollection extends Collection {
     int size();
 }
