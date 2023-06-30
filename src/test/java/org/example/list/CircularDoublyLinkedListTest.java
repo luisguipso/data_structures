@@ -59,4 +59,24 @@ class CircularDoublyLinkedListTest {
         assertThat(dll.removeLast(), is(1));
     }
 
+    @Test
+    void shouldRemoveFirstAndThenTheLastElement() {
+        dll.add(1);
+        dll.add(2);
+        dll.add(3);
+        assertThat(dll.remove(), is(1));
+        assertThat(dll.removeLast(), is(3));
+        assertThat(dll.removeLast(), is(2));
+    }
+
+    @Test
+    void shouldRemoveLastAndThenTheFirstElement() {
+        dll.add(1);
+        dll.add(2);
+        dll.add(3);
+        assertThat(dll.removeLast(), is(3));
+        assertThat(dll.remove(), is(1));
+        assertThat(dll.remove(), is(2));
+    }
+
 }

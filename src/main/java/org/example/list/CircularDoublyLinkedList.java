@@ -7,53 +7,58 @@ public class CircularDoublyLinkedList implements CircularDynamicCollection {
 
     @Override
     public void add(int element) {
-        size++;
         DoublyNode newNode = new DoublyNode(element);
-        if (first == null) {
+        if (isEmpty()) {
             first = newNode;
+            size++;
             return;
         }
+        DoublyNode last = getLastNode();
+        last.setNext(newNode);
+        newNode.setPrevious(last);
+        first.setPrevious(newNode);
+        size++;
+    }
+
+    private DoublyNode getLastNode() {
         DoublyNode last = first;
         while (last.getNext() != null) {
             last = (DoublyNode) last.getNext();
         }
-        last.setNext(newNode);
-        newNode.setPrevious(last);
-        first.setPrevious(newNode);
+        return last;
     }
 
     @Override
     public int remove() {
-        if (first != null) {
-            int element = first.getElement();
-            first = (DoublyNode) first.getNext();
-            size--;
-            return element;
-        }
-        throw new RuntimeException("Empty List");
+        if (isEmpty())
+            throw new RuntimeException("Empty List");
+
+        size--;
+        int element = first.getElement();
+        setNewFirstNode();
+        return element;
+
+    }
+
+    private void setNewFirstNode() {
+        DoublyNode newFirst = (DoublyNode) first.getNext();
+
+        if(!isEmpty())
+            newFirst.setPrevious(first.getPrevious());
+
+        first = newFirst;
     }
 
     @Override
     public int removeLast() {
-        if (first == null)
+        if (isEmpty())
             throw new RuntimeException("Empty List");
-        DoublyNode last;
 
-        if(first.getPrevious() == null){
-            last = first;
-            first = null;
-            return last.getElement();
-        }
-
-        last = first.getPrevious();
-        Node prev = last.getPrevious();
-        prev.setNext(null);
-
-        if(!first.equals(prev))
-            first.setPrevious((DoublyNode) prev);
-        else
-            first.setPrevious(null);
-
+        size--;
+        DoublyNode last = first.getPrevious();
+        Node newLast = last.getPrevious();
+        newLast.setNext(null);
+        first.setPrevious((DoublyNode) newLast);
         return last.getElement();
     }
 
