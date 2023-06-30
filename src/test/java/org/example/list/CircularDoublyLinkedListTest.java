@@ -9,7 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 class CircularDoublyLinkedListTest {
 
-    private DynamicCollection dll;
+    private CircularDynamicCollection dll;
 
     @BeforeEach
     void setup() {
@@ -28,6 +28,13 @@ class CircularDoublyLinkedListTest {
     }
 
     @Test
+    void afterRemoveShouldBeEmptyAgain(){
+        dll.add(1);
+        dll.remove();
+        assertThat(dll.isEmpty(), is(true));
+    }
+
+    @Test
     void shouldRemoveTheFirstElement() {
         dll.add(1);
         dll.add(2);
@@ -40,6 +47,16 @@ class CircularDoublyLinkedListTest {
     @Test
     void cannotRemoveFromAnEmptyList() {
         Assertions.assertThrows(RuntimeException.class, () -> dll.remove());
+    }
+
+    @Test
+    void shouldRemoveTheLastElement() {
+        dll.add(1);
+        dll.add(2);
+        dll.add(3);
+        assertThat(dll.removeLast(), is(3));
+        assertThat(dll.removeLast(), is(2));
+        assertThat(dll.removeLast(), is(1));
     }
 
 }
