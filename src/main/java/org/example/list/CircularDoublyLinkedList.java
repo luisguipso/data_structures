@@ -20,6 +20,20 @@ public class CircularDoublyLinkedList implements CircularDynamicCollection {
         size++;
     }
 
+    @Override
+    public void addFirst(int element) {
+        if (isEmpty()) {
+            add(element);
+            return;
+        }
+        size++;
+        DoublyNode newNode = new DoublyNode(element);
+        newNode.setNext(first);
+        newNode.setPrevious(first.getPrevious());
+        first.setPrevious(newNode);
+        first = newNode;
+    }
+
     private DoublyNode getLastNode() {
         DoublyNode last = first;
         while (last.getNext() != null) {
@@ -43,7 +57,7 @@ public class CircularDoublyLinkedList implements CircularDynamicCollection {
     private void setNewFirstNode() {
         DoublyNode newFirst = (DoublyNode) first.getNext();
 
-        if(!isEmpty())
+        if (!isEmpty())
             newFirst.setPrevious(first.getPrevious());
 
         first = newFirst;
@@ -69,6 +83,6 @@ public class CircularDoublyLinkedList implements CircularDynamicCollection {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 }

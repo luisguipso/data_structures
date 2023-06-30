@@ -79,4 +79,37 @@ class CircularDoublyLinkedListTest {
         assertThat(dll.remove(), is(2));
     }
 
+    @Test
+    void shouldBeAbleToAddOnFirst(){
+        dll.add(1);
+        dll.add(2);
+        dll.addFirst(3);
+        assertThat(dll.remove(), is(3));
+        assertThat(dll.remove(), is(1));
+        assertThat(dll.remove(), is(2));
+    }
+
+
+    @Test
+    void shouldBeAbleToAddOnFirstTwice(){
+        dll.addFirst(6);
+        assertThat(dll.isEmpty(), is(false));
+        assertThat(dll.size(), is(1));
+        dll.add(1);
+        dll.add(2);
+        dll.addFirst(3);
+        dll.add(4);
+        dll.addFirst(5);
+        assertThat(dll.size(), is(6));
+
+        assertThat(dll.remove(), is(5));
+        assertThat(dll.remove(), is(3));
+        assertThat(dll.remove(), is(6));
+        assertThat(dll.remove(), is(1));
+        assertThat(dll.remove(), is(2));
+        assertThat(dll.remove(), is(4));
+        assertThat(dll.size(), is(0));
+        assertThat(dll.isEmpty(), is(true));
+    }
+
 }
