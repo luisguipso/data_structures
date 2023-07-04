@@ -1,9 +1,9 @@
 package org.example;
 
-import org.example.queue.StaticCollection;
-import org.example.queue.StaticQueue;
-import org.example.stack.Stack;
-import org.example.stack.StackImpl;
+import org.example.data_structures.queue.StaticCollection;
+import org.example.data_structures.queue.StaticQueue;
+import org.example.data_structures.stack.Stack;
+import org.example.data_structures.stack.StackImpl;
 
 import java.util.Scanner;
 

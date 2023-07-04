@@ -1,7 +1,7 @@
-package org.example.list;
+package org.example.data_structures.list;
 
 public class Node {
-    private int element;
+    private final int element;
     private Node next;
 
     Node(int element){

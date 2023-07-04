@@ -1,4 +1,4 @@
-package org.example.stack;
+package org.example.data_structures.stack;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,31 +7,31 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class StackImplTest {
+class StackImplTest {
 
     private Stack stack;
 
     @BeforeEach
-    public void setUp(){
+    void setUp(){
         stack = new StackImpl();
     }
 
     @Test
-    public void newStackIsEmpty() {
+    void newStackIsEmpty() {
 
 
         assertThat(stack.isEmpty(), is(true));
     }
 
     @Test
-    public void afterAddAnItemStackIsNotEmpty() {
+    void afterAddAnItemStackIsNotEmpty() {
         stack.push(1);
 
         assertThat(stack.isEmpty(), is(false));
     }
 
     @Test
-    public void afterAddAllItensStackIsNotEmpty() {
+    void afterAddAllItensStackIsNotEmpty() {
         for (int i = 0; i < 10; i++)
             stack.push(i);
 
@@ -39,12 +39,12 @@ public class StackImplTest {
     }
 
     @Test
-    public void newStackIsNotFull() {
+    void newStackIsNotFull() {
         assertThat(stack.isFull(), is(false));
     }
 
     @Test
-    public void afterAddJustSomeElementsStackShouldNotBeFull() {
+    void afterAddJustSomeElementsStackShouldNotBeFull() {
         for (int i = 0; i < 5; i++)
             stack.push(i);
 
@@ -52,7 +52,7 @@ public class StackImplTest {
     }
 
     @Test
-    public void afterAddAllElementsStackShouldBeFull() {
+    void afterAddAllElementsStackShouldBeFull() {
         for (int i = 0; i < 10; i++)
             stack.push(i);
 
@@ -60,7 +60,7 @@ public class StackImplTest {
     }
 
     @Test
-    public void popRetunsTheLastInsertedItem() {
+    void popRetunsTheLastInsertedItem() {
         stack.push(1);
         stack.push(2);
         stack.push(3);
@@ -73,7 +73,7 @@ public class StackImplTest {
 
 
     @Test
-    public void shouldBePossibleToCreateAStackOfOtherSide(){
+    void shouldBePossibleToCreateAStackOfOtherSide(){
         Stack stackOfAHundredElements = new StackImpl(100);
         assertThat(stackOfAHundredElements.isEmpty(), is(true));
 
@@ -87,7 +87,7 @@ public class StackImplTest {
     }
 
     @Test
-    public void pushOnAFullStack(){
+    void pushOnAFullStack(){
         for(int i : new int[] {1,2,3,4,5,6,7,8,9,10})
             stack.push(i);
 
@@ -97,7 +97,7 @@ public class StackImplTest {
     }
 
     @Test
-    public void popInAnEmptyStack(){
+    void popInAnEmptyStack(){
         assertThat(stack.isEmpty(), is(true));
 
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> stack.pop());

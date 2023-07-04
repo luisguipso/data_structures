@@ -1,4 +1,4 @@
-package org.example.list;
+package org.example.data_structures.list;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

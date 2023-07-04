@@ -1,4 +1,4 @@
-package org.example.queue;
+package org.example.data_structures.queue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

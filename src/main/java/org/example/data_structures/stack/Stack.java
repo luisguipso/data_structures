@@ -1,4 +1,4 @@
-package org.example.stack;
+package org.example.data_structures.stack;
 
 public interface Stack {
 

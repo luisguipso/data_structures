@@ -1,4 +1,4 @@
-package org.example.list;
+package org.example.data_structures.list;
 
 public class LinkedList implements DynamicCollection {
 

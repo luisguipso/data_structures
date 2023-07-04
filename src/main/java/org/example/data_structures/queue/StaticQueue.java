@@ -1,4 +1,4 @@
-package org.example.queue;
+package org.example.data_structures.queue;
 
 public class StaticQueue implements StaticCollection {
     private int numberOfElements;

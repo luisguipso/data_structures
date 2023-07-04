@@ -1,4 +1,4 @@
-package org.example.list;
+package org.example.data_structures.list;
 
 public class CircularDoublyLinkedList implements CircularDynamicCollection {
 
@@ -60,9 +60,9 @@ public class CircularDoublyLinkedList implements CircularDynamicCollection {
 
         size--;
         DoublyNode last = first.getPrevious();
-        Node newLast = last.getPrevious();
+        DoublyNode newLast = last.getPrevious();
         newLast.setNext(first);
-        first.setPrevious((DoublyNode) newLast);
+        first.setPrevious(newLast);
         return last.getElement();
     }
 
