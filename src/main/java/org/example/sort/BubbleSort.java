@@ -11,11 +11,15 @@ public class BubbleSort implements Sort {
                 if (numbers[i] <= numbers[i + 1])
                     continue;
 
-                int aux = numbers[i];
-                numbers[i] = numbers[i + 1];
-                numbers[i + 1] = aux;
+                switchThem(numbers, i, i + 1);
             }
         }
         return numbers;
+    }
+
+    private static void switchThem(int[] numbers, int firstIndex, int secondIndex) {
+        int aux = numbers[firstIndex];
+        numbers[firstIndex] = numbers[secondIndex];
+        numbers[secondIndex] = aux;
     }
 }

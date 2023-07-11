@@ -6,17 +6,26 @@ public class SelectionSort implements Sort{
             return numbers;
 
         for (int i = 0; i < numbers.length - 1; i++) {
-            int lowestValueIndex = i;
-            for (int x = i + 1; x < numbers.length; x++) {
-                if(numbers[x] < numbers[lowestValueIndex])
-                    lowestValueIndex = x;
-            }
+            int lowestValueIndex = getLowestValueIndex(numbers, i);
             if(numbers[i] > numbers[lowestValueIndex]){
-                int smallerNumber = numbers[i];
-                numbers[i] = numbers[lowestValueIndex];
-                numbers[lowestValueIndex] = smallerNumber;
+                switchThem(numbers, i, lowestValueIndex);
             }
         }
         return numbers;
+    }
+
+    private static void switchThem(int[] numbers, int firstIndex, int secondIndex) {
+        int smallerNumber = numbers[firstIndex];
+        numbers[firstIndex] = numbers[secondIndex];
+        numbers[secondIndex] = smallerNumber;
+    }
+
+    private static int getLowestValueIndex(int[] numbers, int i) {
+        int lowestValueIndex = i;
+        for (int x = i + 1; x < numbers.length; x++) {
+            if(numbers[x] < numbers[lowestValueIndex])
+                lowestValueIndex = x;
+        }
+        return lowestValueIndex;
     }
 }
