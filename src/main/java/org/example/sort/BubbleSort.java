@@ -8,10 +8,11 @@ public class BubbleSort implements Sort {
         for (int n = 0; n < numbers.length; n++) {
             //on each interaction the last element will be the biggest, so we don't need to change it (length -n -1)
             for (int i = 0; i < numbers.length -1 -n; i++) {
-                if (numbers[i] <= numbers[i + 1])
+                int nextElement = i + 1;
+                if (numbers[i] <= numbers[nextElement])
                     continue;
 
-                switchThem(numbers, i, i + 1);
+                switchThem(numbers, i, nextElement);
             }
         }
         return numbers;
