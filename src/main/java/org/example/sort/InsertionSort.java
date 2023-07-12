@@ -6,12 +6,15 @@ public class InsertionSort implements Sort {
             return numbers;
 
         for (int i = 1; i < numbers.length; i++) {
-            for (int j = i; j > 0 && numbers[j - 1] > numbers[j]; j--) {
-                int aux = numbers[j - 1];
-                numbers[j - 1] = numbers[j];
-                numbers[j] = aux;
+            int key = numbers[i];
+            int j = i - 1;
+            while (j >= 0 && key < numbers[j]) {
+                numbers[j + 1] = numbers[j];
+                j--;
             }
+            numbers[j + 1] = key;
         }
         return numbers;
     }
+
 }
