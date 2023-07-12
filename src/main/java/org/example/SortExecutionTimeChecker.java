@@ -12,55 +12,88 @@ import java.util.Scanner;
 public class SortExecutionTimeChecker {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        boolean printArrays = getOptionForPrintingArrays(in);
-        int size = askSizeOfArray(in);
-        int[] generated = generateAnArrayOfIntegers(printArrays, size);
-
-        Date startedAt = new Date(System.currentTimeMillis());
-        System.out.println("\nSorting started at: " + startedAt);
-
-        Sort sort = getSortMethod(in);
-
-        int[] ordered = sort.order(generated);
-
-        Date finishedAt = new Date(System.currentTimeMillis());
-        if (printArrays) printSortedArray(ordered);
-        System.out.println("Sorting finished at: " + finishedAt);
-        System.out.println("Elapsed time: " + (finishedAt.getTime() - startedAt.getTime()) + "ms.");
+        boolean printArrays = askIfShouldPrintArrays(in);
+        int size = askTheArraySize(in);
+        int[] generated = genARandomArray(size);
+        if (printArrays) printArray(generated);
+        Sort sortMethod = getSortMethod(in);
+        int[] ordered = sortArray(sortMethod, generated);
+        if (printArrays) printArray(ordered);
     }
 
-    private static void printSortedArray(int[] ordered) {
-        Arrays.stream(ordered).forEach(e -> System.out.print(e + "  "));
-        System.out.println("");
+    private static boolean askIfShouldPrintArrays(Scanner in) {
+        log("print arrays ('y' or 'n'): ");
+        return in.next().equalsIgnoreCase("y");
+    }
+
+    private static int askTheArraySize(Scanner in) {
+        log("type the size of the array to generate: ");
+        return in.nextInt();
+    }
+
+    private static int[] genARandomArray(int size) {
+        return new RamdomArrayGenerator(size).gen();
+    }
+
+    private static void printArray(int[] ordered) {
+        Arrays.stream(ordered).forEach(e -> log(e + "  "));
     }
 
     private static Sort getSortMethod(Scanner in) {
         Sort sort;
-        System.out.print("Type the algorithm to use\n 0 - Bubble Sort,\n 1 - Selection Sort, \n 2 - Insertion Sort]\n: ");
-        switch (in.nextInt()) {
-            case 1:
-                sort = new SelectionSort();
-                break;
-            case 2:
-                sort = new InsertionSort();
-                break;
-            default:
-                sort = new BubbleSort();
-        }
+        String lBreak = "\n";
+        String[] algs = new String[] {" 0 - Bubble Sort", " 1 - Selection Sort", " 2 - Insertion Sort"};
+
+        askAlgorithmsToUse(lBreak, algs);
+        int chosen = in.nextInt();
+        sort = createSort(chosen);
+
+        log("Will use: ".concat(algs[chosen]));
         return sort;
     }
 
-    private static int[] generateAnArrayOfIntegers(boolean printArrays, int size) {
-       return new RamdomArrayGenerator().gen(size, printArrays);
+    private static Sort createSort(int chosen) {
+        return switch (chosen) {
+            case 1 -> new SelectionSort();
+            case 2 -> new InsertionSort();
+            default -> new BubbleSort();
+        };
     }
 
-    private static int askSizeOfArray(Scanner in) {
-        System.out.print("type the size of the array to generate: ");
-        return in.nextInt();
+    private static int[] sortArray(Sort sort, int[] generated) {
+        Date startedAt = getActualTime();
+        log("Sorting started at: ".concat(startedAt.toString()));
+
+        int[] ordered = sort.order(generated);
+
+        Date finishedAt = getActualTime();
+        log("Sorting finished at: ".concat(finishedAt.toString()));
+        logElapsedTime(startedAt, finishedAt);
+        return ordered;
     }
 
-    private static boolean getOptionForPrintingArrays(Scanner in) {
-        System.out.print("print arrays ('y' or 'n'): ");
-        return in.next().equalsIgnoreCase("y");
+    private static Date getActualTime() {
+        return new Date(System.currentTimeMillis());
     }
+
+    private static void log(String s) {
+        System.out.println(s);
+    }
+
+    private static void logElapsedTime(Date startedAt, Date finishedAt) {
+        long elapsedTime = finishedAt.getTime() - startedAt.getTime();
+        String toStr = String.valueOf(elapsedTime);
+        String msg = "Elapsed time: ".concat(toStr).concat("ms.");
+        log(msg);
+    }
+
+    private static void askAlgorithmsToUse(String lBreak, String[] algs) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Type the algorithm to use")
+          .append(lBreak);
+        Arrays.stream(algs)
+                .forEach(a -> sb.append(a).append(lBreak));
+        log(sb.toString());
+    }
+
 }
