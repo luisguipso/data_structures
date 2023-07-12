@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.sort.BubbleSort;
+import org.example.sort.InsertionSort;
 import org.example.sort.SelectionSort;
 import org.example.sort.Sort;
 
@@ -35,10 +36,13 @@ public class SortExecutionTimeChecker {
 
     private static Sort getSortMethod(Scanner in) {
         Sort sort;
-        System.out.print("Type the algorithm to use\n 0 - Bubble Sort,\n 1 - Selection Sort]\n: ");
+        System.out.print("Type the algorithm to use\n 0 - Bubble Sort,\n 1 - Selection Sort, \n 2 - Insertion Sort]\n: ");
         switch (in.nextInt()) {
             case 1:
                 sort = new SelectionSort();
+                break;
+            case 2:
+                sort = new InsertionSort();
                 break;
             default:
                 sort = new BubbleSort();

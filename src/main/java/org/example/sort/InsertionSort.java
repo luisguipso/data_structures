@@ -1,6 +1,6 @@
 package org.example.sort;
 
-public class InsertionSort {
+public class InsertionSort implements Sort {
     public int[] order(int[] numbers) {
         if (numbers == null || numbers.length <= 1)
             return numbers;
