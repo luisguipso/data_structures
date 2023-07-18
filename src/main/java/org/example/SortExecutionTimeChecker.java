@@ -1,15 +1,15 @@
 package org.example;
 
-import org.example.sort.BubbleSort;
-import org.example.sort.InsertionSort;
-import org.example.sort.SelectionSort;
-import org.example.sort.Sort;
+import org.example.sort.*;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
 public class SortExecutionTimeChecker {
+
+    public static final String LINE_BREAK = "\n";
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         boolean printArrays = askIfShouldPrintArrays(in);
@@ -37,18 +37,23 @@ public class SortExecutionTimeChecker {
 
     private static void printArray(int[] ordered) {
         Arrays.stream(ordered).forEach(e -> log(e + "  "));
+        log(LINE_BREAK);
     }
 
     private static Sort getSortMethod(Scanner in) {
         Sort sort;
-        String lBreak = "\n";
-        String[] algs = new String[] {" 0 - Bubble Sort", " 1 - Selection Sort", " 2 - Insertion Sort"};
+        String[] algs = new String[]{
+                " 0 - Bubble Sort",
+                " 1 - Selection Sort",
+                " 2 - Insertion Sort",
+                " 3 - Quick Sort"
+        };
 
-        askAlgorithmsToUse(lBreak, algs);
+        askAlgorithmsToUse(algs);
         int chosen = in.nextInt();
         sort = createSort(chosen);
 
-        log("Will use: ".concat(algs[chosen]));
+        log("Will use: ".concat(algs[chosen]).concat(LINE_BREAK));
         return sort;
     }
 
@@ -56,18 +61,19 @@ public class SortExecutionTimeChecker {
         return switch (chosen) {
             case 1 -> new SelectionSort();
             case 2 -> new InsertionSort();
+            case 3 -> new QuickSort();
             default -> new BubbleSort();
         };
     }
 
     private static int[] sortArray(Sort sort, int[] generated) {
         Date startedAt = getActualTime();
-        log("Sorting started at: ".concat(startedAt.toString()));
+        log("Sorting started at: ".concat(startedAt.toString()).concat(LINE_BREAK));
 
         int[] ordered = sort.order(generated);
 
         Date finishedAt = getActualTime();
-        log("Sorting finished at: ".concat(finishedAt.toString()));
+        log("Sorting finished at: ".concat(finishedAt.toString()).concat(LINE_BREAK));
         logElapsedTime(startedAt, finishedAt);
         return ordered;
     }
@@ -77,22 +83,22 @@ public class SortExecutionTimeChecker {
     }
 
     private static void log(String s) {
-        System.out.println(s);
+        System.out.print(s);
     }
 
     private static void logElapsedTime(Date startedAt, Date finishedAt) {
         long elapsedTime = finishedAt.getTime() - startedAt.getTime();
         String toStr = String.valueOf(elapsedTime);
-        String msg = "Elapsed time: ".concat(toStr).concat("ms.");
+        String msg = "Elapsed time: ".concat(toStr).concat("ms.").concat(LINE_BREAK);
         log(msg);
     }
 
-    private static void askAlgorithmsToUse(String lBreak, String[] algs) {
+    private static void askAlgorithmsToUse(String[] algs) {
         StringBuilder sb = new StringBuilder();
         sb.append("Type the algorithm to use")
-          .append(lBreak);
+                .append(LINE_BREAK);
         Arrays.stream(algs)
-                .forEach(a -> sb.append(a).append(lBreak));
+                .forEach(a -> sb.append(a).append(LINE_BREAK));
         log(sb.toString());
     }
 
