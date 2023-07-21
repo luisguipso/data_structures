@@ -13,7 +13,7 @@ public class QuickSort implements Sort {
     }
 
     private static void quickSort(int[] numbers, int first, int last) {
-        if(first >= last)
+        if (first >= last)
             return;
 
         int pivot = partition(numbers, first, last);
@@ -29,9 +29,11 @@ public class QuickSort implements Sort {
         int left = first + 1;
         int right = last;
         while (true) {
+            //finds the position of an element which is greater than or equals to the pivot
             while (left <= last && numbers[left] < pivot)
                 left++;
 
+            //finds the position of an element which is less than or equals to the pivot
             while (right >= first && numbers[right] > pivot)
                 right--;
 
