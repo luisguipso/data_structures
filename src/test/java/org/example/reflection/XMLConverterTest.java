@@ -16,14 +16,14 @@ class XMLConverterTest {
     }
 
     @Test
-    void convertASimpleClass(){
+    void convertASimpleClass() throws IllegalAccessException {
         User user = new User(1L, "luis", "123456");
         assertThat(converter.convert(user),
                 is("""
                 <user>
-                    <id></id>
-                    <username></username>
-                    <password></password>
+                    <id>1</id>
+                    <username>luis</username>
+                    <password>123456</password>
                 </user>"""));
 //        <id>1</id>
 //                    <username>luis</username>
