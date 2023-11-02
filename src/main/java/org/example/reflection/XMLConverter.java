@@ -7,31 +7,42 @@ import java.util.List;
 public class XMLConverter {
 
     public static final String LINE_BREAK = "\n";
+    private StringBuilder builder;
 
     public String convert(Object o) throws IllegalAccessException {
-        String className = o.getClass().getSimpleName().toLowerCase();
-        String fields = convertFields(o);
-        return openTag(className) + "\n" + fields + closeTag(className);
+        convertClass(o);
+        return builder.toString();
     }
 
-    private String convertFields(Object o) throws IllegalAccessException {
-        StringBuilder builder = new StringBuilder();
+    private void convertClass(Object o) throws IllegalAccessException {
+        String className = o.getClass().getSimpleName().toLowerCase();
+        builder.append(openTag(className)).append(LINE_BREAK);
+        convertClassFields(o);
+        builder.append(closeTag(className));
+    }
+
+    private void convertClassFields(Object o) throws IllegalAccessException {
         List<String> javaTypes = Arrays.asList("int", "long", "float", "double", "boolean", "char", "string");
         for (Field each : o.getClass().getDeclaredFields()) {
-            if (!each.canAccess(o))
-                each.trySetAccessible();
-            String attributeName = each.getName();
-            if (!javaTypes.contains(each.getType().getSimpleName().toLowerCase()))
-                builder.append(convert(each.get(o)))
-                        .append(LINE_BREAK);
-            else
-                builder.append(openTag(attributeName))
-                       .append(each.get(o))
-                       .append(closeTag(attributeName))
-                       .append(LINE_BREAK);
-
+            convertField(o, javaTypes, each);
         }
-        return builder.toString();
+    }
+
+    private void convertField(Object o, List<String> javaTypes, Field each) throws IllegalAccessException {
+        if (!each.canAccess(o))
+            each.trySetAccessible();
+        if (!javaTypes.contains(each.getType().getSimpleName().toLowerCase()))
+            builder.append(convert(each.get(o)));
+        else
+            appendJavaType(o, each);
+        builder.append(LINE_BREAK);
+    }
+
+    private void appendJavaType(Object o, Field each) throws IllegalAccessException {
+        String attributeName = each.getName();
+        builder.append(openTag(attributeName))
+                .append(each.get(o))
+                .append(closeTag(attributeName));
     }
 
     private String openTag(String tagName) {
