@@ -20,18 +20,20 @@ public class XMLConverter {
         for (Field each : o.getClass().getDeclaredFields()) {
             if (!each.canAccess(o))
                 each.trySetAccessible();
-            String attributeName = each.getName();
             if (!javaTypes.contains(each.getType().getSimpleName().toLowerCase()))
-                builder.append(convert(each.get(o)))
-                        .append(LINE_BREAK);
+                builder.append(convert(each.get(o)));
             else
-                builder.append(openTag(attributeName))
-                       .append(each.get(o))
-                       .append(closeTag(attributeName))
-                       .append(LINE_BREAK);
-
+                appendJavaType(o, builder, each);
+            builder.append(LINE_BREAK);
         }
         return builder.toString();
+    }
+
+    private void appendJavaType(Object o, StringBuilder builder, Field each) throws IllegalAccessException {
+        String attributeName = each.getName();
+        builder.append(openTag(attributeName))
+                .append(each.get(o))
+                .append(closeTag(attributeName));
     }
 
     private String openTag(String tagName) {
