@@ -7,7 +7,11 @@ import java.util.List;
 public class XMLConverter {
 
     public static final String LINE_BREAK = "\n";
-    private StringBuilder builder;
+    private final StringBuilder builder;
+
+    public XMLConverter() {
+        builder = new StringBuilder();
+    }
 
     public String convert(Object o) throws IllegalAccessException {
         convertClass(o);
@@ -22,23 +26,23 @@ public class XMLConverter {
     }
 
     private void convertClassFields(Object o) throws IllegalAccessException {
-        List<String> javaTypes = Arrays.asList("int", "long", "float", "double", "boolean", "char", "string");
         for (Field each : o.getClass().getDeclaredFields()) {
-            convertField(o, javaTypes, each);
+            if (!each.canAccess(o))
+                each.trySetAccessible();
+            convertField(o, each);
         }
     }
 
-    private void convertField(Object o, List<String> javaTypes, Field each) throws IllegalAccessException {
-        if (!each.canAccess(o))
-            each.trySetAccessible();
+    private void convertField(Object o, Field each) throws IllegalAccessException {
+        List<String> javaTypes = Arrays.asList("int", "long", "float", "double", "boolean", "char", "string");
         if (!javaTypes.contains(each.getType().getSimpleName().toLowerCase()))
             builder.append(convert(each.get(o)));
         else
-            appendJavaType(o, each);
+            appendFieldOfJavaType(o, each);
         builder.append(LINE_BREAK);
     }
 
-    private void appendJavaType(Object o, Field each) throws IllegalAccessException {
+    private void appendFieldOfJavaType(Object o, Field each) throws IllegalAccessException {
         String attributeName = each.getName();
         builder.append(openTag(attributeName))
                 .append(each.get(o))
