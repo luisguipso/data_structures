@@ -43,4 +43,29 @@ class XMLConverterTest {
                 </user>
                 </people>"""));
     }
+
+
+    private class User {
+        private final Long id;
+        private final String username;
+        private final String password;
+
+        public User(Long id, String username, String password) {
+            this.id = id;
+            this.username = username;
+            this.password = password;
+        }
+    }
+
+    private class People {
+        private final Long id;
+        private final String name;
+        private final User user;
+
+        public People(Long id, String name, User user) {
+            this.id = id;
+            this.name = name;
+            this.user = user;
+        }
+    }
 }

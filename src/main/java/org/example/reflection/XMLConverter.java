@@ -34,15 +34,19 @@ public class XMLConverter {
     }
 
     private void convertField(Object o, Field each) throws IllegalAccessException {
-        List<String> javaTypes = Arrays.asList("int", "long", "float", "double", "boolean", "char", "string");
-        if (!javaTypes.contains(each.getType().getSimpleName().toLowerCase()))
-            builder.append(convert(each.get(o)));
+        if (isNotPrimitive(each))
+            convert(each.get(o));
         else
-            appendFieldOfJavaType(o, each);
+            appendPrimitiveField(o, each);
         builder.append(LINE_BREAK);
     }
 
-    private void appendFieldOfJavaType(Object o, Field each) throws IllegalAccessException {
+    private static boolean isNotPrimitive(Field each) {
+        List<String> primitiveTypes = Arrays.asList("int", "long", "float", "double", "boolean", "char", "string");
+        return !primitiveTypes.contains(each.getType().getSimpleName().toLowerCase());
+    }
+
+    private void appendPrimitiveField(Object o, Field each) throws IllegalAccessException {
         String attributeName = each.getName();
         builder.append(openTag(attributeName))
                 .append(each.get(o))
