@@ -1,7 +1,6 @@
 package org.example;
 
 
-
 import org.example.data_structures.map.LinkedHashMap;
 import org.example.data_structures.map.Node;
 import org.example.data_structures.queue.StaticCollection;
@@ -9,6 +8,8 @@ import org.example.data_structures.queue.StaticQueue;
 import org.example.data_structures.stack.Stack;
 import org.example.data_structures.stack.StackImpl;
 import org.example.data_structures.tree.BinaryTree;
+import org.example.data_structures.tree.BinaryTreeImpl;
+import org.example.data_structures.tree.BinaryTreePrinter;
 
 
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class App {
     }
 
     private static void testBinaryTree() {
-        BinaryTree tree = new BinaryTree();
+        BinaryTree tree = new BinaryTreeImpl();
         tree.add(5);
         tree.add(2);
         tree.add(3);
@@ -34,9 +35,14 @@ public class App {
         tree.add(7);
         tree.add(10);
 
-        System.out.println("4: " + tree.search(4));
-        System.out.println("5: " + tree.search(5));
-        System.out.println("10: " + tree.search(10));
+        System.out.println("Printing tree in pre-order");
+        BinaryTreePrinter.print(tree);
+        System.out.println("Printing tree in in-order");
+        BinaryTreePrinter.print(tree, BinaryTreePrinter.IN_ORDER);
+        System.out.println("Printing tree in post-order");
+        BinaryTreePrinter.print(tree, BinaryTreePrinter.POST_ORDER);
+        System.out.println("Printing tree in inverted in-order");
+        BinaryTreePrinter.print(tree, BinaryTreePrinter.INVERTED_IN_ORDER);
     }
 
     private static void testBitWize() {
@@ -72,10 +78,8 @@ public class App {
         do {
             key = scanner.nextInt();
             Node r = map.get(key);
-            if (r != null)
-                System.out.println("Found: " + r.getKey() + " = " + r.getValue());
-            else
-                System.out.println("Not found.");
+            if (r != null) System.out.println("Found: " + r.getKey() + " = " + r.getValue());
+            else System.out.println("Not found.");
 
         } while (key != -1);
     }
@@ -86,8 +90,7 @@ public class App {
         for (int i = 0; i < 1_000_000; i++)
             queue.add(i);
         System.out.println("Start removing the elements...");
-        while (!queue.isEmpty())
-            System.out.println(queue.remove());
+        while (!queue.isEmpty()) System.out.println(queue.remove());
         System.out.println("\nThe end of program!");
     }
 
@@ -98,8 +101,7 @@ public class App {
         int numberInDecimal = scanner.nextInt();
 
         while (numberInDecimal != 0) {
-            if (!stack.isFull())
-                stack.push(numberInDecimal % 2);
+            if (!stack.isFull()) stack.push(numberInDecimal % 2);
             numberInDecimal /= 2;
         }
 
