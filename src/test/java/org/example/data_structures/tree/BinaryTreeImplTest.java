@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class BinaryTreeTest {
-    private BinaryTree binaryTree;
+class BinaryTreeImplTest {
+    private BinaryTreeImpl binaryTree;
 
     @BeforeEach
     void setUp() {
-        binaryTree = new BinaryTree();
+        binaryTree = new BinaryTreeImpl();
     }
 
     @Test

@@ -1,21 +1,19 @@
 package org.example.data_structures.tree;
 
-public class BinaryTree {
-    private Node root;
+public interface BinaryTree {
+    void add(int n);
 
-    public void add(int n){
-        if(isEmpty())
-            this.root = new Node(n);
-        else
-            this.root.add(n);
-    }
+    BinaryTree getLeft();
 
-    public int search(int n){
-        if(isEmpty())
-            return 0;
-        return this.root.search(n);
-    }
-    public boolean isEmpty(){
-        return this.root == null;
-    }
+    BinaryTree getRight();
+
+    boolean hasRightElement();
+
+    boolean hasLeftElement();
+
+    int search(int n);
+
+    boolean isEmpty();
+
+    Integer getValue();
 }
